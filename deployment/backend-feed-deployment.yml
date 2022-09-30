@@ -39,6 +39,7 @@ spec:
               value: "udagram-last-fuckin-chance.cxbdzxkkhgsa.us-east-1.rds.amazonaws.com"
             - name: "POSTGRES_DB"
               value: "postgres"
+            
 
 ---
 apiVersion: v1
