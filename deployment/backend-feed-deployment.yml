@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-feed
+  labels:
+    app: backend-feed
+spec:
+  selector:
+    matchLabels:
+      app: backend-feed
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: backend-feed
+    spec:
+      containers:
+        - name: backend-feed
+          image: docker.io/morehwachege/udagram-api-feed:v3
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          resources:
+            limits:
+              cpu: 1000m
+            requests:
+              cpu: 500m
+          # envFrom:
+          #   - secretRef:
+          #       name: env-secret
+          #   - configMapRef:
+          #       name: env-configmap
+          env:
+            - name: "POSTGRES_USERNAME"
+              value: "muriithigakuru"
+            - name: "POSTGRES_PASSWORD"
+              value: "moreh4aladin"
+            - name: "POSTGRES_HOST"
+              value: "udagram-last-fuckin-chance.cxbdzxkkhgsa.us-east-1.rds.amazonaws.com"
+            - name: "POSTGRES_DB"
+              value: "postgres"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service: backend-feed
+  name: backend-feed
+spec:
+  ports:
+    - name: "8080"
+      port: 8080
+      targetPort: 8080
+  selector:
+    service: backend-feed

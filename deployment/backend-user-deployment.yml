@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-user
+  labels:
+    app: backend-user
+spec:
+  selector:
+    matchLabels:
+      app: backend-user
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: backend-user
+    spec:
+      containers:
+        - name: backend-user
+          image: docker.io/morehwachege/udagram-api-user:v3
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          resources:
+            limits:
+              cpu: 1000m
+            requests:
+              cpu: 500m
+          env:
+            - name: "POSTGRES_USERNAME"
+              value: "muriithigakuru"
+            - name: "POSTGRES_PASSWORD"
+              value: "moreh4aladin"
+            - name: "POSTGRES_HOST"
+              value: "udagram-last-fuckin-chance.cxbdzxkkhgsa.us-east-1.rds.amazonaws.com"
+            - name: "POSTGRES_DB"
+              value: "postgres"
+
+          # envFrom:
+          #   - secretRef:
+          #       name: env-secret
+          #   - secretRef:
+          #       name: aws-secret
+          #   - configMapRef:
+          #       name: env-configmap
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service: backend-user
+  name: backend-user
+spec:
+  ports:
+    - name: "8080"
+      port: 8080
+      targetPort: 8080
+  selector:
+    service: backend-user
