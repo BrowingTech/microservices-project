@@ -16,32 +16,40 @@ spec:
     spec:
       containers:
         - name: backend-user
-          image: docker.io/morehwachege/udagram-api-user:latest
+          image: docker.io/morehwachege/udagram-api-user:v3
           imagePullPolicy: Always
           ports:
-            - containerPort: 8080
+            - containerPort: 80
           resources:
             limits:
-              cpu: 1000m
+              cpu: 1024m
             requests:
               cpu: 500m
+          envFrom:
+            - secretRef:
+                name: env-secret
+            - secretRef:
+                name: aws-secret
+            - configMapRef:
+                name: env-configmap
+
           env:
             - name: "POSTGRES_USERNAME"
               value: "muriithigakuru"
             - name: "POSTGRES_PASSWORD"
               value: "moreh4aladin"
             - name: "POSTGRES_HOST"
-              value: "udagram-last-fuckin-chance.cxbdzxkkhgsa.us-east-1.rds.amazonaws.com"
+              value: "udagramdb.cxbdzxkkhgsa.us-east-1.rds.amazonaws.com"
             - name: "POSTGRES_DB"
               value: "postgres"
-
-          # envFrom:
-          #   - secretRef:
-          #       name: env-secret
-          #   - secretRef:
-          #       name: aws-secret
-          #   - configMapRef:
-          #       name: env-configmap
+            - name: "JWT_SECRET"
+              value: "hello"
+            - name: "AWS_REGION"
+              value: "us-east-1"
+            - name: "AWS_PROFILE"
+              value: "default"
+            - name: "AWS_BUCKET"
+              value: "udagrambucket-758145856267-prod"
 
 ---
 apiVersion: v1

@@ -16,10 +16,10 @@ spec:
     spec:
       containers:
         - name: reverseproxy
-          image: docker.io/morehwachege/reverseproxy:latest
+          image: docker.io/morehwachege/reverseproxy:v3
           imagePullPolicy: Always
           ports:
-            - containerPort: 8080
+            - containerPort: 80
           resources:
             limits:
               cpu: 500m
@@ -37,7 +37,7 @@ spec:
   ports:
     - name: "8080"
       port: 8080
-      targetPort: 8080
+      targetPort: 80
       protocol: TCP
   selector:
     service: reverseproxy

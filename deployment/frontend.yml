@@ -16,15 +16,17 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: docker.io/morehwachege/udagram-frontend:latest
+          image: docker.io/morehwachege/udagram-frontend:v8
           imagePullPolicy: Always
           ports:
             - containerPort: 80
           resources:
             limits:
-              cpu: 1000m
+              memory: "1024Mi"
+              cpu: "500m"
             requests:
-              cpu: 500m
+              memory: "64Mi"
+              cpu: "250m"
           envFrom:
             - secretRef:
                 name: env-secret
@@ -32,6 +34,7 @@ spec:
                 name: aws-secret
             - configMapRef:
                 name: env-configmap
+      restartPolicy: Always
 
 ---
 apiVersion: v1
@@ -39,12 +42,11 @@ kind: Service
 metadata:
   name: frontend
   labels:
-    service: frontend
+    run: frontend
 spec:
   ports:
-    - name: "8080"
-      port: 80
-      targetPort: 80
+    - port: 80
+      targetPort: 8080
       protocol: TCP
   selector:
-    service: frontend
+    run: frontend
