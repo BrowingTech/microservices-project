@@ -9,4 +9,4 @@ data:
   AWS_REGION: us-east-1
   AWS_PROFILE: default
   JWT_SECRET: Hello
-  URL: http://a3901fa9227eb4d47a4ba5278696ba4c-1294118375.us-east-1.elb.amazonaws.com:8100
+  # URL: http://a3901fa9227eb4d47a4ba5278696ba4c-1294118375.us-east-1.elb.amazonaws.com:8100

@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: reverseproxy
-          image: docker.io/morehwachege/reverseproxy:v3
+          image: docker.io/morehwachege/reverseproxy:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: backend-feed
-          image: docker.io/morehwachege/udagram-api-feed:v3
+          image: docker.io/morehwachege/udagram-api-feed:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

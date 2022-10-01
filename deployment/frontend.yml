@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: docker.io/morehwachege/udagram-frontend:v5
+          image: docker.io/morehwachege/udagram-frontend:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 80
